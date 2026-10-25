@@ -205,9 +205,12 @@
   }
   function addProductAsIs(product){
     const existing=state.cart.find(item=>item.productId===product.id&&!item.customization);
-    if(existing)existing.quantity++;
-    else state.cart.push({id:"item-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),productId:product.id,name:product.name,basePrice:product.price,unitPrice:product.price,quantity:1,product,customization:null});
-    const added=state.cart[state.cart.length-1];
+    let added=existing;
+    if(existing) existing.quantity++;
+    else {
+      added={id:"item-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),productId:product.id,name:product.name,basePrice:product.price,unitPrice:product.price,quantity:1,product,customization:null};
+      state.cart.push(added);
+    }
     showAdded(added);
   }
   function addBuilderItem(){
@@ -353,7 +356,6 @@
   function renderBuilder(){
     if(!state.builderProduct)return;
     const step=builderSteps[state.builderStep];
-    $("#builder-count-label").textContent="STEP "+(state.builderStep+1)+" OF "+builderSteps.length;
     $("#step-count-label").textContent="STEP "+(state.builderStep+1)+" OF "+builderSteps.length;
     $("#builder-kicker").textContent=step.kicker;
     $("#builder-title").textContent=step.title;
@@ -454,7 +456,7 @@
       case "loyalty-demo": closeDialog("loyalty-dialog");announce("Member sign-in is a prototype. Continuing as a guest.");break;
       case "close-quickview": showView(state.previousView||"menu");break;
       case "open-product": openProduct(element.dataset.productId);break;
-      case "quickview-add": if(state.selectedProduct){closeDialog("unused");addProductAsIs(state.selectedProduct);}break;
+      case "quickview-add": if(state.selectedProduct){addProductAsIs(state.selectedProduct);}break;
       case "quickview-customize": if(state.selectedProduct){resetBuilder(state.selectedProduct); }break;
       case "cancel-builder": state.editingItemId=null;showView("menu");announce("Customisation cancelled. Your existing order is unchanged.");break;
       case "builder-back":
@@ -473,7 +475,7 @@
       case "apply-promo":{
         const code=$("#promo-code").value.trim().toUpperCase();
         if(code==="SAVE5"){state.discount=5;state.promoCode=code;$("#promo-message").textContent="CHF 5.00 discount applied.";announce("Promo code applied: five Swiss francs off.");}
-        else if(code==="WELCOME10"){state.discount=Math.round(cartSubtotal()*10)/1000*100;state.discount=Math.round(cartSubtotal()*0.10*100)/100;state.promoCode=code;$("#promo-message").textContent="10% demo discount applied.";announce("Demo promo code applied.");}
+        else if(code==="WELCOME10"){state.discount=Math.round(cartSubtotal()*0.10*100)/100;state.promoCode=code;$("#promo-message").textContent="10% demo discount applied.";announce("Demo promo code applied.");}
         else{state.discount=0;state.promoCode="";$("#promo-message").textContent="That demo code was not recognised. Try SAVE5 or WELCOME10.";announce("Promo code not recognised.");}
         renderCartTotals();break;
       }
@@ -600,7 +602,6 @@
   function init(){
     renderMenu();renderBuilder();renderCart();renderPayment();renderUpsells();updateChrome();
     $$("[data-view]").forEach(view=>{const active=view.dataset.view==="welcome";view.hidden=!active;view.setAttribute("aria-hidden",active?"false":"true");});
-    $("#last-unused").hidden=true;
   }
   init();
 })();
