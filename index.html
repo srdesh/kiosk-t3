@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf9f6">
+  <meta name="description" content="Pan-Oston Full HD self-service kiosk experience for OrderMonkey.">
+  <title>OrderMonkey — Self-service kiosk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#kiosk-main">Skip to kiosk content</a>
+  <div class="kiosk" id="kiosk" data-device="Pan-Oston Full HD" aria-label="OrderMonkey self-service ordering kiosk">
+    <div class="sr-only" id="live-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <main id="kiosk-main" class="kiosk-main">
+      <!-- 01 — Idle / attract -->
+      <section class="view view-welcome is-active" id="screen-welcome" data-view="welcome" aria-labelledby="welcome-title">
+        <header class="welcome-header">
+          <a class="brand" href="#screen-welcome" data-action="home" aria-label="OrderMonkey home">
+            <span class="brand-mark" aria-hidden="true">OM</span>
+            <span class="brand-copy"><strong>OrderMonkey</strong><small>SELF-SERVICE KIOSK</small></span>
+          </a>
+          <div class="header-right">
+            <span class="service-pill"><span class="status-dot"></span> READY TO ORDER</span>
+            <button class="icon-button" type="button" data-action="language" aria-haspopup="dialog" aria-label="Choose language">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg>
+              <span id="language-label">EN</span>
+            </button>
+            <button class="icon-button" type="button" data-action="accessibility" aria-haspopup="dialog" aria-label="Accessibility settings">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2"></circle><path d="M4 8h16M12 8v5m0 0-4 7m4-7 5 7"></path></svg>
+              <span>Access</span>
+            </button>
+          </div>
+        </header>
+        <div class="welcome-content">
+          <div class="welcome-copy">
+            <p class="eyebrow"><span class="eyebrow-dot"></span> GOOD FOOD, YOUR WAY</p>
+            <h1 id="welcome-title">Make it yours.<br><span>Make it delicious.</span></h1>
+            <p class="lead">Build your favourite meal, one tasty choice at a time.</p>
+            <div class="welcome-benefits" aria-label="Ordering benefits">
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg> Made your way</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg> Clear prices</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg> No rush</span>
+            </div>
+            <button class="btn btn-primary btn-xl" type="button" data-go="dining">
+              Touch to start <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg>
+            </button>
+            <p class="welcome-help">Need a hand? A team member will be happy to help.</p>
+          </div>
+          <div class="welcome-art" aria-label="Illustration of a freshly made burger" role="img">
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <span class="art-spark spark-one" aria-hidden="true">✳</span><span class="art-spark spark-two" aria-hidden="true">✦</span>
+            <div class="food-plate"><div class="hero-burger food-burger"><span class="food-shadow"></span><span class="bun-top"></span><span class="sesame sesame-a"></span><span class="sesame sesame-b"></span><span class="sesame sesame-c"></span><span class="lettuce"></span><span class="tomato"></span><span class="cheese"></span><span class="patty"></span><span class="bun-bottom"></span></div></div>
+            <div class="art-note note-top"><span class="note-icon">✳</span><span><strong>Built around you</strong><small>Every craving covered</small></span></div>
+            <div class="art-note note-bottom"><span class="note-badge">100%</span><span><strong>Your choice</strong><small>Your meal, your rules</small></span></div>
+          </div>
+        </div>
+        <footer class="welcome-footer">
+          <span>Welcome to OrderMonkey</span>
+          <div class="utility-actions">
+            <button type="button" class="utility-button" data-action="sound" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"></path><path d="M17 9a5 5 0 0 1 0 6"></path></svg><span data-sound-label>Sound off</span>
+            </button>
+            <button type="button" class="utility-button" data-action="accessibility">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2"></circle><path d="M4 8h16M12 8v5m0 0-4 7m4-7 5 7"></path></svg> Accessibility
+            </button>
+            <span class="powered">Powered by <strong>OrderMonkey</strong></span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- 02 — Dining type -->
+      <section class="view" id="screen-dining" data-view="dining" hidden aria-labelledby="dining-title">
+        <header class="screen-topbar">
+          <button class="btn btn-quiet" type="button" data-go="welcome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"></path></svg> Back</button>
+          <a class="brand brand-compact" href="#screen-welcome" data-action="home" aria-label="OrderMonkey home"><span class="brand-mark">OM</span><span class="brand-name">OrderMonkey</span></a>
+          <div class="topbar-actions">
+            <button class="btn btn-outline" type="button" data-action="language"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18"></path></svg><span id="language-label-dining">English</span></button>
+            <button class="btn btn-outline" type="button" data-action="accessibility">Accessibility</button>
+          </div>
+        </header>
+        <div class="dining-layout">
+          <div class="section-intro center-intro">
+            <p class="eyebrow">LET'S GET STARTED</p>
+            <h1 id="dining-title">Where would you like to eat?</h1>
+            <p>Choose your dining option to see the next steps.</p>
+          </div>
+          <div class="dining-options" role="group" aria-label="Choose dine in or takeaway">
+            <button class="dining-card is-selected" type="button" data-dining="dine-in" aria-pressed="true">
+              <span class="selection-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span>
+              <span class="dining-icon dining-icon-plate" aria-hidden="true"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="27"></circle><circle cx="40" cy="40" r="17"></circle><path d="M9 15v28m7-28v28M12 43v22M70 15c-8 8-11 16-11 25h11v25"></path></svg></span>
+              <strong>Dine in</strong><span class="choice-desc">Enjoy your meal here</span>
+              <span class="card-action">Selected</span>
+            </button>
+            <button class="dining-card" type="button" data-dining="takeaway" aria-pressed="false">
+              <span class="selection-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span>
+              <span class="dining-icon" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M20 28h40l-3 39H23l-3-39Z"></path><path d="M29 28v-7a11 11 0 0 1 22 0v7"></path></svg></span>
+              <strong>Takeaway</strong><span class="choice-desc">Take it with you</span>
+              <span class="card-action">Choose takeaway</span>
+            </button>
+          </div>
+          <aside class="loyalty-banner">
+            <span class="loyalty-icon" aria-hidden="true">✳</span>
+            <div><strong>Members get a little more.</strong><p>Earn points and enjoy member offers. Sign in now or continue as a guest.</p></div>
+            <button class="btn btn-outline" type="button" data-action="loyalty">Sign in</button>
+            <button class="text-button" type="button" data-action="skip-loyalty">Skip for now</button>
+          </aside>
+        </div>
+        <footer class="screen-footer">
+          <div class="footer-utilities"><button class="utility-button" type="button" data-action="sound" aria-pressed="false">Sound off</button><button class="utility-button" type="button" data-action="accessibility">Accessibility</button><span class="powered">Powered by <strong>OrderMonkey</strong></span></div>
+          <button class="btn btn-primary btn-lg" type="button" data-go="menu">Continue <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button>
+        </footer>
+      </section>
+
+      <!-- 03 — Menu -->
+      <section class="view" id="screen-menu" data-view="menu" hidden aria-labelledby="menu-title">
+        <header class="screen-topbar">
+          <button class="btn btn-quiet" type="button" data-go="dining"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"></path></svg> Back</button>
+          <a class="brand brand-compact" href="#screen-welcome" data-action="home" aria-label="OrderMonkey home"><span class="brand-mark">OM</span><span class="brand-name">OrderMonkey</span></a>
+          <div class="topbar-actions">
+            <button class="btn btn-outline" type="button" data-action="allergens">Allergens</button>
+            <button class="btn btn-outline" type="button" data-action="language"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18"></path></svg><span id="language-label-menu">EN</span></button>
+            <button class="btn btn-dark btn-cart" type="button" data-go="upsell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 11.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><span>Cart</span><span class="cart-count" id="menu-cart-count">0</span></button>
+          </div>
+        </header>
+        <div class="menu-shell">
+          <aside class="category-rail" aria-label="Menu categories">
+            <p class="rail-label">MENU</p>
+            <div class="category-list" id="category-list" role="group" aria-label="Filter by category"></div>
+            <div class="rail-promo"><span class="promo-icon" aria-hidden="true">✳</span><strong>Make it yours.</strong><p>Customise your favourite burger just the way you like it.</p></div>
+          </aside>
+          <section class="menu-content" aria-labelledby="menu-title">
+            <div class="menu-heading-row">
+              <div><p class="eyebrow">FRESHLY MADE FOR YOU</p><h1 id="menu-title">What sounds good?</h1><p class="menu-subtitle">Choose a favourite. You can customise it next.</p></div>
+              <label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 5 5"></path></svg><span class="sr-only">Search menu</span><input type="search" id="menu-search" placeholder="Search menu" autocomplete="off"></label>
+            </div>
+            <div class="dietary-filters" id="dietary-filters" role="group" aria-label="Dietary filters">
+              <span class="filter-label">FILTER BY</span>
+              <button class="filter-chip" type="button" data-filter="Vegan" aria-pressed="false">Vegan</button>
+              <button class="filter-chip" type="button" data-filter="Halal" aria-pressed="false">Halal</button>
+              <button class="filter-chip" type="button" data-filter="Gluten-free" aria-pressed="false">Gluten-free</button>
+              <button class="filter-chip" type="button" data-filter="Spicy" aria-pressed="false">Spicy</button>
+              <button class="filter-chip" type="button" data-filter="Popular" aria-pressed="false">Top picks</button>
+            </div>
+            <div class="menu-grid" id="menu-grid" aria-live="polite" aria-relevant="additions text"></div>
+          </section>
+          <aside class="order-rail" aria-label="Current order summary">
+            <div class="order-rail-header"><span class="eyebrow">YOUR ORDER</span><span class="order-count" id="rail-count">0 items</span></div>
+            <div class="order-rail-items" id="rail-items"><div class="empty-cart"><span class="empty-bag" aria-hidden="true">＋</span><strong>Your order starts here</strong><p>Add something delicious to see it here.</p></div></div>
+            <div class="order-rail-bottom">
+              <div class="total-line"><span>Subtotal</span><strong id="rail-subtotal">CHF 0.00</strong></div>
+              <p class="tax-note">Taxes included where applicable.</p>
+              <button class="btn btn-primary btn-full" type="button" data-go="upsell" id="rail-checkout" disabled>Review order <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button>
+              <button class="btn btn-plain btn-full" type="button" data-action="allergens">View allergen information</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 04 — Item quick view -->
+      <section class="view view-center" id="screen-quickview" data-view="quickview" hidden aria-labelledby="quickview-title">
+        <div class="modal-scrim" aria-hidden="true"></div>
+        <div class="quickview-card">
+          <button class="close-button" type="button" data-action="close-quickview" aria-label="Close item details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
+          <div class="quickview-art" id="quickview-art"></div>
+          <div class="quickview-details">
+            <p class="eyebrow" id="quickview-category">HOUSE FAVOURITE</p>
+            <h1 id="quickview-title">Classic Burger</h1>
+            <p id="quickview-description">Beef, cheddar and our signature house sauce.</p>
+            <div class="quickview-price" id="quickview-price">CHF 12.50</div>
+            <div class="allergen-summary"><strong>Contains:</strong> <span id="quickview-allergens">Gluten, milk, sesame</span><button type="button" class="text-button" data-action="allergens">Full allergen details</button></div>
+            <div class="quickview-actions">
+              <button class="btn btn-outline btn-lg" type="button" data-action="quickview-add">Add as is</button>
+              <button class="btn btn-primary btn-lg" type="button" data-action="quickview-customize">Customise <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button>
+            </div>
+            <p class="note-small">Illustrations are indicative. Please ask our team about exact ingredients and cross-contact.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 — Build your own / stepper -->
+      <section class="view" id="screen-builder" data-view="builder" hidden aria-labelledby="builder-title">
+        <header class="screen-topbar builder-topbar">
+          <button class="btn btn-quiet" type="button" data-action="cancel-builder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg> Cancel</button>
+          <div class="builder-product-title"><strong id="builder-product-name">Classic Burger</strong><span id="builder-base-price">CHF 12.50</span></div>
+          <button class="btn btn-outline" type="button" data-action="allergens">Allergens</button>
+        </header>
+        <div class="builder-layout">
+          <nav class="step-rail" aria-label="Burger customisation steps">
+            <p class="rail-label">BUILD YOUR ORDER</p>
+            <ol id="step-list"></ol>
+            <div class="step-rail-help"><span class="help-dot">?</span><span><strong>Need a hand?</strong><small>Ask a team member at any time.</small></span></div>
+          </nav>
+          <section class="builder-main">
+            <div class="builder-progress">
+              <div class="progress-label"><span id="step-count-label">STEP 1 OF 7</span><span id="step-required-label">REQUIRED · PICK ONE</span></div>
+              <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
+            </div>
+            <div class="builder-heading"><div><p class="eyebrow" id="builder-kicker">THE FOUNDATION</p><h1 id="builder-title">Choose your bun</h1><p id="builder-prompt">Pick the bun that brings it all together.</p></div><span class="step-badge" id="step-badge">1 / 7</span></div>
+            <div class="builder-options" id="builder-options" role="group" aria-labelledby="builder-title"></div>
+            <div class="builder-inline-note" id="builder-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5m0-8h.01"></path></svg><span>Tap any option to select it. Selected options are labelled and highlighted.</span></div>
+          </section>
+          <aside class="build-preview" aria-label="Live meal preview and price">
+            <div class="preview-header"><span class="eyebrow">YOUR BUILD</span><span class="preview-status"><span></span> LIVE PREVIEW</span></div>
+            <div class="preview-food" id="preview-food"></div>
+            <div class="preview-name"><strong id="preview-name">Classic Burger</strong><span id="preview-choice-count">0 choices</span></div>
+            <div class="preview-summary" id="preview-summary"></div>
+            <div class="preview-total"><span>Current total</span><strong id="preview-total">CHF 12.50</strong></div>
+            <p class="preview-disclaimer">Your price updates as you make choices.</p>
+          </aside>
+        </div>
+        <footer class="builder-footer">
+          <div class="builder-footer-total"><span>ITEM TOTAL</span><strong id="builder-footer-total">CHF 12.50</strong></div>
+          <button class="btn btn-outline btn-lg" type="button" data-action="builder-back" id="builder-back">Back</button>
+          <button class="btn btn-primary btn-lg" type="button" data-action="builder-next" id="builder-next">Next: Patty <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button>
+        </footer>
+      </section>
+
+      <!-- 06 — Item added -->
+      <section class="view view-center" id="screen-added" data-view="added" hidden aria-labelledby="added-title">
+        <div class="added-card">
+          <div class="success-ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></div>
+          <p class="eyebrow">NICE CHOICE</p>
+          <h1 id="added-title">Added to your order.</h1>
+          <p id="added-description">Your meal is in the bag. Want anything else?</p>
+          <div class="added-item-row"><div class="added-thumbnail" id="added-thumbnail"></div><div><strong id="added-item-name">Classic Burger</strong><small id="added-item-details">Customised just for you</small></div><strong id="added-item-price">CHF 12.50</strong></div>
+          <div class="added-total-line"><span>Current subtotal</span><strong id="added-subtotal">CHF 12.50</strong></div>
+          <div class="added-actions"><button class="btn btn-outline btn-lg" type="button" data-go="menu">Keep browsing</button><button class="btn btn-primary btn-lg" type="button" data-go="upsell">Continue to checkout <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button></div>
+        </div>
+      </section>
+
+      <!-- 07 — Global upsell -->
+      <section class="view" id="screen-upsell" data-view="upsell" hidden aria-labelledby="upsell-title">
+        <header class="screen-topbar">
+          <button class="btn btn-quiet" type="button" data-go="menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"></path></svg> Back to menu</button>
+          <a class="brand brand-compact" href="#screen-welcome" data-action="home" aria-label="OrderMonkey home"><span class="brand-mark">OM</span><span class="brand-name">OrderMonkey</span></a>
+          <button class="btn btn-outline" type="button" data-action="language">English ▾</button>
+        </header>
+        <div class="upsell-content">
+          <div class="section-intro"><p class="eyebrow">A LITTLE SOMETHING EXTRA</p><h1 id="upsell-title">Make it a meal?</h1><p>Round out your order with a side or a drink. Totally up to you.</p></div>
+          <div class="upsell-grid" id="upsell-grid"></div>
+          <div class="upsell-bottom"><button class="btn btn-quiet btn-lg" type="button" data-go="cart">No thanks, view my order</button><button class="btn btn-primary btn-lg" type="button" data-action="upsell-checkout">Add selected &amp; continue <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button></div>
+        </div>
+      </section>
+
+      <!-- 08 — Cart -->
+      <section class="view" id="screen-cart" data-view="cart" hidden aria-labelledby="cart-title">
+        <header class="screen-topbar">
+          <button class="btn btn-quiet" type="button" data-go="menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"></path></svg> Add more</button>
+          <a class="brand brand-compact" href="#screen-welcome" data-action="home" aria-label="OrderMonkey home"><span class="brand-mark">OM</span><span class="brand-name">OrderMonkey</span></a>
+          <div class="topbar-actions"><button class="btn btn-outline" type="button" data-action="allergens">Allergens</button><span class="service-pill" id="cart-service">DINE IN</span></div>
+        </header>
+        <div class="cart-layout">
+          <section class="cart-items-panel" aria-labelledby="cart-title">
+            <div class="cart-heading"><div><p class="eyebrow">ALMOST THERE</p><h1 id="cart-title">Review your order</h1></div><span class="order-count" id="cart-items-count">0 items</span></div>
+            <div class="cart-items" id="cart-items"></div>
+            <div class="cart-extras">
+              <div class="tip-panel"><strong>Tip for the team <span>(optional)</span></strong><div class="tip-options" role="group" aria-label="Choose a tip"><button type="button" class="tip-button is-selected" data-tip="0" aria-pressed="true">No tip</button><button type="button" class="tip-button" data-tip="5" aria-pressed="false">5%</button><button type="button" class="tip-button" data-tip="10" aria-pressed="false">10%</button><button type="button" class="tip-button" data-tip="custom" aria-pressed="false">Custom</button></div></div>
+              <div class="promo-panel"><label for="promo-code">Promo code</label><input type="text" id="promo-code" placeholder="Enter code" autocomplete="off" aria-describedby="promo-message"><button type="button" class="btn btn-outline" data-action="apply-promo">Apply</button><span class="sr-only" id="promo-message" aria-live="polite"></span></div>
+            </div>
+          </section>
+          <aside class="cart-summary" aria-label="Order total">
+            <div class="summary-card">
+              <p class="eyebrow">ORDER SUMMARY</p>
+              <div class="summary-line"><span>Subtotal</span><strong id="cart-subtotal">CHF 0.00</strong></div>
+              <div class="summary-line"><span>VAT included</span><strong id="cart-tax">CHF 0.00</strong></div>
+              <div class="summary-line" id="discount-row" hidden><span>Discount</span><strong id="cart-discount">− CHF 0.00</strong></div>
+              <div class="summary-line" id="tip-row" hidden><span>Tip</span><strong id="cart-tip">CHF 0.00</strong></div>
+              <div class="summary-divider"></div>
+              <div class="summary-total"><span>Total</span><strong id="cart-total">CHF 0.00</strong></div>
+              <button class="btn btn-primary btn-full btn-xl" type="button" data-go="payment" id="cart-payment-button">Proceed to payment <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button>
+              <button class="btn btn-plain btn-full" type="button" data-go="upsell">Add a side or drink</button>
+              <p class="summary-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3Z"></path><path d="m8 12 2.5 2.5L16 9"></path></svg> Review your items and total before paying.</p>
+            </div>
+          </aside>
+        </div>
+        <footer class="cart-footer"><span>Need to change something? Use <strong>Edit</strong> beside an item.</span><button class="btn btn-outline" type="button" data-action="cancel-order">Cancel order</button></footer>
+      </section>
+
+      <!-- 09 — Payment -->
+      <section class="view" id="screen-payment" data-view="payment" hidden aria-labelledby="payment-title">
+        <header class="screen-topbar">
+          <button class="btn btn-quiet" type="button" data-go="cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"></path></svg> Back to order</button>
+          <a class="brand brand-compact" href="#screen-welcome" data-action="home" aria-label="OrderMonkey home"><span class="brand-mark">OM</span><span class="brand-name">OrderMonkey</span></a>
+          <span class="secure-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg> SECURE CHECKOUT</span>
+        </header>
+        <div class="payment-layout">
+          <section class="payment-methods" aria-labelledby="payment-title">
+            <p class="eyebrow">PAYMENT</p><h1 id="payment-title">How would you like to pay?</h1><p class="section-description">Select a payment method. Follow the instructions on the terminal.</p>
+            <div class="payment-options" role="radiogroup" aria-label="Payment method">
+              <button class="payment-option is-selected" type="button" role="radio" aria-checked="true" data-payment="card">
+                <span class="payment-option-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M7 15h4"></path></svg></span><span class="payment-option-copy"><strong>Card or mobile wallet</strong><small>Tap, insert or use a supported wallet on the terminal.</small></span><span class="payment-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span>
+              </button>
+              <button class="payment-option" type="button" role="radio" aria-checked="false" data-payment="twint">
+                <span class="payment-option-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"></rect><path d="M10 18h4"></path></svg></span><span class="payment-option-copy"><strong>TWINT</strong><small>Use your phone to scan the payment QR code.</small></span><span class="payment-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span>
+              </button>
+              <button class="payment-option" type="button" role="radio" aria-checked="false" data-payment="counter">
+                <span class="payment-option-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18l-2-6H5l-2 6Z"></path><path d="M5 10v10h14V10M9 20v-6h6v6"></path></svg></span><span class="payment-option-copy"><strong>Pay at the counter</strong><small>Take your order number to the counter to pay.</small></span><span class="payment-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span>
+              </button>
+            </div>
+          </section>
+          <aside class="terminal-panel">
+            <div class="terminal-panel-heading"><span class="eyebrow">READY WHEN YOU ARE</span><span class="terminal-live-dot"></span></div>
+            <div class="terminal-illustration" aria-hidden="true"><div class="terminal-device"><div class="terminal-screen"><div class="terminal-brandline"></div><div class="terminal-amount" id="terminal-amount">CHF 0.00</div><div class="terminal-chip-row"><span></span><span></span><span></span></div><div class="terminal-tap"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></div></div><div class="terminal-reader"></div><div class="terminal-base"></div></div><div class="terminal-rings"></div></div>
+            <div class="terminal-instructions"><strong id="terminal-instruction-title">Tap or insert your card</strong><p id="terminal-instruction">Follow the prompts on the payment terminal. This demo will not charge a card.</p></div>
+            <div class="payment-total"><span>TOTAL TO PAY</span><strong id="payment-total">CHF 0.00</strong></div>
+          </aside>
+        </div>
+        <footer class="screen-footer payment-footer"><span class="payment-demo-note"><span class="demo-dot"></span> Prototype mode — no real payment is taken.</span><button class="btn btn-outline btn-lg" type="button" data-go="cart">Cancel</button><button class="btn btn-primary btn-lg" type="button" data-action="confirm-payment">Confirm demo payment <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button></footer>
+      </section>
+
+      <!-- 10 — Thank you / receipt -->
+      <section class="view view-thankyou" id="screen-thanks" data-view="thanks" hidden aria-labelledby="thanks-title">
+        <header class="thanks-header">
+          <a class="brand brand-compact" href="#screen-welcome" data-action="home" aria-label="OrderMonkey home"><span class="brand-mark">OM</span><span class="brand-name">OrderMonkey</span></a>
+          <span class="service-pill"><span class="status-dot"></span> ORDER CONFIRMED</span>
+        </header>
+        <div class="thanks-content">
+          <div class="thanks-message">
+            <div class="success-ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></div>
+            <p class="eyebrow">THANK YOU</p>
+            <h1 id="thanks-title">That was a good choice.</h1>
+            <p>Your order is confirmed and our team is getting it ready.</p>
+            <div class="order-number">ORDER <strong id="thanks-order-number">#0125</strong></div>
+            <div class="ready-time"><span class="ready-icon" aria-hidden="true">◷</span><span><strong>Ready in about 10 minutes</strong><small id="thanks-service">Dine in</small></span></div>
+          </div>
+          <div class="receipt-area">
+            <div class="receipt-card"><div class="receipt-card-header"><span class="receipt-icon">▦</span><span><strong>Digital receipt</strong><small>Scan to save a copy</small></span></div><div class="fake-qr" aria-label="Illustrative QR code placeholder" role="img"></div><p>This QR is a design placeholder.</p></div>
+            <div class="receipt-card"><div class="receipt-card-header"><span class="receipt-icon">▤</span><span><strong>Paper receipt</strong><small>Print a copy</small></span></div><div class="paper-receipt" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div><button class="btn btn-outline btn-full" type="button" data-action="print-receipt">Print receipt</button></div>
+          </div>
+        </div>
+        <footer class="thanks-footer"><span>Thank you for choosing OrderMonkey.</span><button class="btn btn-primary btn-lg" type="button" data-action="new-order">Start a new order <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></button></footer>
+      </section>
+
+      <!-- Accessibility dialog -->
+      <dialog class="utility-dialog" id="accessibility-dialog" aria-labelledby="accessibility-title">
+        <form method="dialog" class="dialog-header"><div><p class="eyebrow">SETTINGS</p><h2 id="accessibility-title">Make it comfortable for you.</h2></div><button class="close-button" value="cancel" aria-label="Close accessibility settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></form>
+        <div class="settings-list">
+          <label class="setting-row"><span><strong>High contrast</strong><small>Increase contrast between text and surfaces.</small></span><input type="checkbox" id="high-contrast-toggle"><span class="switch" aria-hidden="true"></span></label>
+          <label class="setting-row"><span><strong>Reduce motion</strong><small>Reduce animation and transitions.</small></span><input type="checkbox" id="reduce-motion-toggle"><span class="switch" aria-hidden="true"></span></label>
+          <div class="setting-row"><span><strong>Text size</strong><small>Choose a comfortable reading size.</small></span><div class="text-size-options"><button class="size-button" type="button" data-text-size="normal" aria-pressed="true">A</button><button class="size-button" type="button" data-text-size="large" aria-pressed="false">A+</button></div></div>
+        </div>
+        <div class="dialog-footer"><button class="btn btn-primary btn-full" type="button" data-action="close-accessibility">Done</button></div>
+      </dialog>
+
+      <!-- Language dialog -->
+      <dialog class="utility-dialog language-dialog" id="language-dialog" aria-labelledby="language-title">
+        <form method="dialog" class="dialog-header"><div><p class="eyebrow">LANGUAGE</p><h2 id="language-title">Choose your language</h2></div><button class="close-button" value="cancel" aria-label="Close language choices"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></form>
+        <div class="language-options" role="group" aria-label="Available languages"><button type="button" class="language-option is-selected" data-language="en" aria-pressed="true"><span>🇬🇧</span><span><strong>English</strong><small>English</small></span><span class="language-check">✓</span></button><button type="button" class="language-option" data-language="de" aria-pressed="false"><span>🇨🇭</span><span><strong>Deutsch</strong><small>German</small></span><span class="language-check">✓</span></button><button type="button" class="language-option" data-language="fr" aria-pressed="false"><span>🇫🇷</span><span><strong>Français</strong><small>French</small></span><span class="language-check">✓</span></button><button type="button" class="language-option" data-language="it" aria-pressed="false"><span>🇮🇹</span><span><strong>Italiano</strong><small>Italian</small></span><span class="language-check">✓</span></button></div>
+        <p class="note-small dialog-note">This prototype demonstrates language selection; production translations should be reviewed before launch.</p>
+        <div class="dialog-footer"><button class="btn btn-primary btn-full" type="button" data-action="close-language">Done</button></div>
+      </dialog>
+
+      <!-- Allergen dialog -->
+      <dialog class="utility-dialog" id="allergen-dialog" aria-labelledby="allergen-title">
+        <form method="dialog" class="dialog-header"><div><p class="eyebrow">FOOD INFORMATION</p><h2 id="allergen-title">Allergen information</h2></div><button class="close-button" value="cancel" aria-label="Close allergen information"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></form>
+        <p class="dialog-copy">Ingredient and cross-contact information can vary. These examples are illustrative and are not a substitute for the restaurant's verified allergen list.</p>
+        <div class="allergen-list"><div><strong>Classic Burger</strong><span>Gluten, milk, sesame</span></div><div><strong>Chicken Burger</strong><span>Gluten, egg</span></div><div><strong>Veggie Burger</strong><span>May contain soy and gluten</span></div><div><strong>Poke Bowl</strong><span>Fish, soy, sesame</span></div><div><strong>Fries</strong><span>Check preparation method for cross-contact</span></div></div>
+        <p class="note-small">Please speak to a team member if you have an allergy or severe intolerance.</p>
+        <div class="dialog-footer"><button class="btn btn-primary btn-full" type="button" data-action="close-allergens">Close</button></div>
+      </dialog>
+
+      <!-- Loyalty demo dialog -->
+      <dialog class="utility-dialog" id="loyalty-dialog" aria-labelledby="loyalty-title">
+        <form method="dialog" class="dialog-header"><div><p class="eyebrow">ORDERMONKEY REWARDS</p><h2 id="loyalty-title">Member sign in</h2></div><button class="close-button" value="cancel" aria-label="Close member sign in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></form>
+        <label class="form-label" for="member-phone">Mobile number or member ID</label><input class="dialog-input" id="member-phone" type="text" autocomplete="off" placeholder="Enter your details">
+        <p id="loyalty-message" class="note-small">Member sign-in is a UI demo. No account details are sent anywhere.</p>
+        <div class="dialog-footer"><button class="btn btn-outline" type="button" data-action="close-loyalty">Continue as guest</button><button class="btn btn-primary" type="button" data-action="loyalty-demo">Continue</button></div>
+      </dialog>
+
+      <!-- Custom tip dialog -->
+      <dialog class="utility-dialog" id="tip-dialog" aria-labelledby="tip-title">
+        <form method="dialog" class="dialog-header"><div><p class="eyebrow">TIP FOR THE TEAM</p><h2 id="tip-title">Choose a tip amount</h2></div><button class="close-button" value="cancel" aria-label="Close custom tip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></form>
+        <label class="form-label" for="custom-tip">Tip amount in CHF</label><input class="dialog-input" id="custom-tip" type="number" min="0" step="0.50" value="0.00">
+        <div class="dialog-footer"><button class="btn btn-outline" type="button" data-action="close-tip">Cancel</button><button class="btn btn-primary" type="button" data-action="save-tip">Apply tip</button></div>
+      </dialog>
+
+      <!-- Demo payment confirmation -->
+      <dialog class="utility-dialog" id="payment-dialog" aria-labelledby="payment-dialog-title">
+        <form method="dialog" class="dialog-header"><div><p class="eyebrow">DEMO CHECKOUT</p><h2 id="payment-dialog-title">Simulate payment?</h2></div><button class="close-button" value="cancel" aria-label="Close payment confirmation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></form>
+        <p class="dialog-copy">This is a local prototype only. It will not contact a payment provider or charge a card.</p>
+        <div class="demo-amount"><span>Demo amount</span><strong id="demo-amount">CHF 0.00</strong></div>
+        <div class="dialog-footer"><button class="btn btn-outline" type="button" data-action="close-payment">Go back</button><button class="btn btn-primary" type="button" data-action="finish-demo-payment">Confirm demo order</button></div>
+      </dialog>
+    </main>
+  </div>
+</body>
+</html>
